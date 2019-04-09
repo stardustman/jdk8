@@ -34,6 +34,7 @@ package java.lang;
  * @see     java.lang.Class
  * @since   JDK1.0
  */
+//所有Object的superclass,包括数组
 public class Object {
 
     private static native void registerNatives();
