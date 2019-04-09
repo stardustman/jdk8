@@ -962,6 +962,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @return a hash code value for a {@code int} value.
      */
     public static int hashCode(int value) {
+        //hash code for int is itself
         return value;
     }
 
@@ -1235,6 +1236,8 @@ public final class Integer extends Number implements Comparable<Integer> {
      *         a value greater than {@code 0} if {@code x > y}
      * @since 1.7
      */
+    // x is this value
+    // y is another value
     public static int compare(int x, int y) {
         return (x < y) ? -1 : ((x == y) ? 0 : 1);
     }
