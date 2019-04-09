@@ -790,15 +790,16 @@ public final class Integer extends Number implements Comparable<Integer> {
             if (integerCacheHighPropValue != null) {
                 try {
                     int i = parseInt(integerCacheHighPropValue);
+                    //保证 high >= 127
                     i = Math.max(i, 127);
-                    // Maximum array size is Integer.MAX_VALUE
+                    // Maximum array size is Integer.MAX_VALUE,取最小值作为保证
                     h = Math.min(i, Integer.MAX_VALUE - (-low) -1);
                 } catch( NumberFormatException nfe) {
                     // If the property cannot be parsed into an int, ignore it.
                 }
             }
             high = h;
-
+            // 一共有 high - low + 1 个数字
             cache = new Integer[(high - low) + 1];
             int j = low;
             for(int k = 0; k < cache.length; k++)
@@ -827,7 +828,11 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @since  1.5
      */
     public static Integer valueOf(int i) {
+        //检查是不是属于IntegerCache范围
         if (i >= IntegerCache.low && i <= IntegerCache.high)
+            // cache[0] is -128,cache[1] is -127 ,依次类推
+            // cache[128] is 0
+            //所以在IntegerCache范围内的数字返回的是同一个对象
             return IntegerCache.cache[i + (-IntegerCache.low)];
         return new Integer(i);
     }
