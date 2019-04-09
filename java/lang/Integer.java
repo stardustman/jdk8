@@ -978,7 +978,9 @@ public final class Integer extends Number implements Comparable<Integer> {
      *          {@code false} otherwise.
      */
     public boolean equals(Object obj) {
+        //判断 obj 是不是 Integer的实例
         if (obj instanceof Integer) {
+            //强制类型转换加上自动拆箱,比较对象的值
             return value == ((Integer)obj).intValue();
         }
         return false;

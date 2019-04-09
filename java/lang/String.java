@@ -823,6 +823,7 @@ public final class String
         if (srcBegin > srcEnd) {
             throw new StringIndexOutOfBoundsException(srcEnd - srcBegin);
         }
+        // native method ,only api
         System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);
     }
 
@@ -982,7 +983,7 @@ public final class String
         if (anObject instanceof String) {
             String anotherString = (String)anObject;
             int n = value.length;
-            //两个字符串长度相等,字符串才有相等的可能性.
+            //两个字符串长度相等,字符才有可能相等
             if (n == anotherString.value.length) {
                 char v1[] = value;
                 char v2[] = anotherString.value;
