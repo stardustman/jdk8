@@ -1150,6 +1150,7 @@ public final class String
      *          value greater than {@code 0} if this string is
      *          lexicographically greater than the string argument.
      */
+    
     public int compareTo(String anotherString) {
         int len1 = value.length;
         int len2 = anotherString.value.length;
@@ -1158,6 +1159,7 @@ public final class String
         char v2[] = anotherString.value;
 
         int k = 0;
+        //字母表顺序比较 'a' < 'b'
         while (k < lim) {
             char c1 = v1[k];
             char c2 = v2[k];

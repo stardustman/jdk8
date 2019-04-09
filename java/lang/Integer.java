@@ -611,6 +611,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @exception  NumberFormatException  if the string does not contain a
      *               parsable integer.
      */
+    //默认十进制parse
     public static int parseInt(String s) throws NumberFormatException {
         return parseInt(s,10);
     }
