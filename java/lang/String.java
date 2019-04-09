@@ -974,12 +974,15 @@ public final class String
      * @see  #equalsIgnoreCase(String)
      */
     public boolean equals(Object anObject) {
+        //比较的是对象本身,a = a 废话,肯定相等
         if (this == anObject) {
             return true;
         }
+        //判断是不是String的实例
         if (anObject instanceof String) {
             String anotherString = (String)anObject;
             int n = value.length;
+            //两个字符串长度相等,字符串才有相等的可能性.
             if (n == anotherString.value.length) {
                 char v1[] = value;
                 char v2[] = anotherString.value;
