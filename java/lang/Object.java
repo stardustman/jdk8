@@ -35,6 +35,7 @@ package java.lang;
  * @since   JDK1.0
  */
 //所有Object的superclass,包括数组
+//wait,notify之所以是native是因为线程调度是OS的功能.也就是native code是C++实现的.
 public class Object {
 
     private static native void registerNatives();
