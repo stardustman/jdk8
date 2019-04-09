@@ -707,6 +707,7 @@ class Thread implements Runnable {
          *
          * A zero status value corresponds to state "NEW".
          */
+        //判定线程状态
         if (threadStatus != 0)
             throw new IllegalThreadStateException();
 
@@ -717,7 +718,9 @@ class Thread implements Runnable {
 
         boolean started = false;
         try {
+            // native method,线程调度交给OS
             start0();
+            //启动状态设置为true
             started = true;
         } finally {
             try {
@@ -730,7 +733,7 @@ class Thread implements Runnable {
             }
         }
     }
-
+      // native method,线程调度交给OS
     private native void start0();
 
     /**
