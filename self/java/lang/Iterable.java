@@ -48,6 +48,7 @@ public interface Iterable<T> {
      *
      * @return an Iterator.
      */
+	//本质上就是指针迭代,想一下单链表的head pointer可以快速迭代
     Iterator<T> iterator();
 
     /**
