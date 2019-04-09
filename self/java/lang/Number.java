@@ -100,6 +100,7 @@ public abstract class Number implements java.io.Serializable {
      *          to type {@code byte}.
      * @since   JDK1.1
      */
+    //Narrowing Primitive Conversions 
     public byte byteValue() {
         return (byte)intValue();
     }
@@ -115,6 +116,7 @@ public abstract class Number implements java.io.Serializable {
      *          to type {@code short}.
      * @since   JDK1.1
      */
+    //Narrowing Primitive Conversions
     public short shortValue() {
         return (short)intValue();
     }
