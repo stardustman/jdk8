@@ -47,16 +47,19 @@ import java.util.Arrays;
 abstract class AbstractStringBuilder implements Appendable, CharSequence {
     /**
      * The value is used for character storage.
+     * 底层还是字符数组啊
      */
     char[] value;
 
     /**
      * The count is the number of characters used.
+     * 已经使用的字符数
      */
     int count;
 
     /**
      * This no-arg constructor is necessary for serialization of subclasses.
+     * //为了子类的序列化
      */
     AbstractStringBuilder() {
     }
@@ -64,6 +67,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
     /**
      * Creates an AbstractStringBuilder of the specified capacity.
      */
+    //创建一个容量为capacity的字符数组
     AbstractStringBuilder(int capacity) {
         value = new char[capacity];
     }
@@ -147,6 +151,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      */
     private int newCapacity(int minCapacity) {
         // overflow-conscious code
+        // 新的字符数组容量
         int newCapacity = (value.length << 1) + 2;
         if (newCapacity - minCapacity < 0) {
             newCapacity = minCapacity;
@@ -157,6 +162,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
     }
 
     private int hugeCapacity(int minCapacity) {
+        //数组长度超过整数最大值
         if (Integer.MAX_VALUE - minCapacity < 0) { // overflow
             throw new OutOfMemoryError();
         }
@@ -385,6 +391,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
             throw new StringIndexOutOfBoundsException(srcEnd);
         if (srcBegin > srcEnd)
             throw new StringIndexOutOfBoundsException("srcBegin > srcEnd");
+        // native method 丫的就是个api呗.
         System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);
     }
 
@@ -403,6 +410,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *             negative or greater than or equal to {@code length()}.
      */
     public void setCharAt(int index, char ch) {
+        //为啥说安全呢,底层都做好检查了呗.
         if ((index < 0) || (index >= count))
             throw new StringIndexOutOfBoundsException(index);
         value[index] = ch;
@@ -445,9 +453,12 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
         if (str == null)
             return appendNull();
         int len = str.length();
+        //先扩展好容量
         ensureCapacityInternal(count + len);
+        //int srcBegin, int srcEnd, char dst[], int dstBegin
         str.getChars(0, len, value, count);
         count += len;
+        //把 StringBuilder 返回,builder pattern,可以进行链式调用
         return this;
     }
 
@@ -926,13 +937,16 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *             {@code length()}, or {@code start} is
      *             greater than {@code end}.
      */
+    
     public String substring(int start, int end) {
+        //边界检查
         if (start < 0)
             throw new StringIndexOutOfBoundsException(start);
         if (end > count)
             throw new StringIndexOutOfBoundsException(end);
         if (start > end)
             throw new StringIndexOutOfBoundsException(end - start);
+        // 重新生成一个新的字符串
         return new String(value, start, end - start);
     }
 
