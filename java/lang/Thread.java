@@ -365,6 +365,7 @@ class Thread implements Runnable {
     private void init(ThreadGroup g, Runnable target, String name,
                       long stackSize, AccessControlContext acc,
                       boolean inheritThreadLocals) {
+        //线程名不可为空
         if (name == null) {
             throw new NullPointerException("name cannot be null");
         }
@@ -413,7 +414,9 @@ class Thread implements Runnable {
             this.contextClassLoader = parent.contextClassLoader;
         this.inheritedAccessControlContext =
                 acc != null ? acc : AccessController.getContext();
+        // target runnable
         this.target = target;
+        //设置优先级
         setPriority(priority);
         if (inheritThreadLocals && parent.inheritableThreadLocals != null)
             this.inheritableThreadLocals =
@@ -744,7 +747,9 @@ class Thread implements Runnable {
      */
     @Override
     public void run() {
+        // 构造函数传进来的target
         if (target != null) {
+            //简直不要太变态啊,直接调用target.run
             target.run();
         }
     }
