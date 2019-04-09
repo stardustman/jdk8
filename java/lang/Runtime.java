@@ -44,6 +44,7 @@ import sun.reflect.Reflection;
  */
 
 public class Runtime {
+    //单例模式,每一个Java application只需要一个runtime,所谓饿汉模式
     private static Runtime currentRuntime = new Runtime();
 
     /**
