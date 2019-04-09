@@ -27,10 +27,11 @@ package java.lang;
 
 /**
  * The <code>Runnable</code> interface should be implemented by any
- * class whose instances are intended to be executed by a thread. The
- * class must define a method of no arguments called <code>run</code>.
+ * class whose instances are intended to be executed by a thread. 
+ * 任何打算用线程执行的类都需要实现该接口
+ * The class must define a method of no arguments called <code>run</code>.
  * <p>
- * This interface is designed to provide a common protocol for objects that
+ * This interface is designed to provide a common protocol for objects that  //common protocol 协议,这个思想很重要.有协议才好办.
  * wish to execute code while they are active. For example,
  * <code>Runnable</code> is implemented by class <code>Thread</code>.
  * Being active simply means that a thread has been started and has not
