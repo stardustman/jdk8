@@ -215,19 +215,26 @@ public class Collections {
             return Collections.iteratorBinarySearch(list, key);
     }
 
+    //二分查找
     private static <T>
     int indexedBinarySearch(List<? extends Comparable<? super T>> list, T key) {
         int low = 0;
         int high = list.size()-1;
 
         while (low <= high) {
+            //无符号右移一位,除以2
             int mid = (low + high) >>> 1;
+            //得到中间值
             Comparable<? super T> midVal = list.get(mid);
+            //中间值和key比较
             int cmp = midVal.compareTo(key);
-
+            // cmp小于0说明中间值 < key,key值在后一半
             if (cmp < 0)
+                //low设置为mid+1,也就是在后一半搜索
                 low = mid + 1;
+                //cmp小于0说明key值在前一半
             else if (cmp > 0)
+                //high设置为mid-1,即是在前一半进行搜索
                 high = mid - 1;
             else
                 return mid; // key found
