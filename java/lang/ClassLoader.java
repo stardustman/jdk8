@@ -474,6 +474,7 @@ public abstract class ClassLoader {
     }
 
     // This method is invoked by the virtual machine to load a class.
+    //底层的实现还是使用了synchronized，jvm调用的方法
     private Class<?> loadClassInternal(String name)
         throws ClassNotFoundException
     {
