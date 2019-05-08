@@ -27,12 +27,14 @@ package java.util;
 
 /**
  * This class represents an observable object, or "data"
- * in the model-view paradigm. It can be subclassed to represent an
- * object that the application wants to have observed.
+ * in the model-view paradigm. 
+ * It can be subclassed to represent an object that the application wants to have observed.
  * <p>
- * An observable object can have one or more observers. An observer
- * may be any object that implements interface <tt>Observer</tt>. After an
- * observable instance changes, an application calling the
+ * An observable object can have one or more observers. //一个被观察者可以一个或多个观察者.
+ * 相当于订阅/发布模式.
+ * An observer may be any object that implements interface <tt>Observer</tt>.
+ * 实现Observer接口的都是观察者
+ *  After an observable instance changes, an application calling the
  * <code>Observable</code>'s <code>notifyObservers</code> method
  * causes all of its observers to be notified of the change by a call
  * to their <code>update</code> method.
@@ -61,6 +63,7 @@ package java.util;
  */
 public class Observable {
     private boolean changed = false;
+    //被观察者持有所有观察者对象
     private Vector<Observer> obs;
 
     /** Construct an Observable with zero Observers. */
@@ -81,6 +84,7 @@ public class Observable {
     public synchronized void addObserver(Observer o) {
         if (o == null)
             throw new NullPointerException();
+        //去重
         if (!obs.contains(o)) {
             obs.addElement(o);
         }
@@ -149,12 +153,13 @@ public class Observable {
              * 2) a recently unregistered Observer will be
              *   wrongly notified when it doesn't care
              */
+        	//被观察者没有发生改变,直接return
             if (!changed)
                 return;
             arrLocal = obs.toArray();
             clearChanged();
         }
-
+        // 通知每一个观察者
         for (int i = arrLocal.length-1; i>=0; i--)
             ((Observer)arrLocal[i]).update(this, arg);
     }
