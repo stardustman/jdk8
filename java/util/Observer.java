@@ -32,6 +32,7 @@ package java.util;
  * @see     java.util.Observable
  * @since   JDK1.0
  */
+//观察者模式中的 观察者,当一个类想要得到被观察者的通知时,要实现这个借口
 public interface Observer {
     /**
      * This method is called whenever the observed object is changed. An
@@ -39,7 +40,7 @@ public interface Observer {
      * <code>notifyObservers</code> method to have all the object's
      * observers notified of the change.
      *
-     * @param   o     the observable object.
+     * @param   o     the observable object. //被观察的对象
      * @param   arg   an argument passed to the <code>notifyObservers</code>
      *                 method.
      */
