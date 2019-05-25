@@ -108,9 +108,11 @@ import java.util.regex.PatternSyntaxException;
  * @since   JDK1.0
  */
 
+ // final 不可变
 public final class String
     implements java.io.Serializable, Comparable<String>, CharSequence {
     /** The value is used for character storage. */
+    // 丫的,就是个字符数组嘛.和C没啥区别
     private final char value[];
 
     /** Cache the hash code for the string */
@@ -3152,11 +3154,16 @@ public final class String
      * <p>
      * A pool of strings, initially empty, is maintained privately by the
      * class {@code String}.
+	 * String Class 维护了一个字符串常量池.
+	 * intern 的意思 to put sb in prison during a war or for political reasons, 
+	 * although they have not been charged with a crime.
+	 * 常量池相当于监狱, 把字符串丢进去
      * <p>
-     * When the intern method is invoked, if the pool already contains a
-     * string equal to this {@code String} object as determined by
-     * the {@link #equals(Object)} method, then the string from the pool is
-     * returned. Otherwise, this {@code String} object is added to the
+     * When the intern method is invoked, 
+	 * 情况1: if the pool already contains a string equal to this {@code String} object 
+	 * as determined by the {@link #equals(Object)} method, then the string from the pool is
+     * returned. 
+	 * 情况2:Otherwise, this {@code String} object is added to the
      * pool and a reference to this {@code String} object is returned.
      * <p>
      * It follows that for any two strings {@code s} and {@code t},
