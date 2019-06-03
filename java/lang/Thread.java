@@ -699,6 +699,7 @@ class Thread implements Runnable {
      * @see        #run()
      * @see        #stop()
      */
+    // 同步方法保证只会启动一次
     public synchronized void start() {
         /**
          * This method is not invoked for the main method thread or "system"
@@ -1717,16 +1718,20 @@ class Thread implements Runnable {
      * A thread state.  A thread can be in one of the following states:
      * <ul>
      * <li>{@link #NEW}<br>
+     * //未启动
      *     A thread that has not yet started is in this state.
      *     </li>
      * <li>{@link #RUNNABLE}<br>
+     * //在运行
      *     A thread executing in the Java virtual machine is in this state.
      *     </li>
      * <li>{@link #BLOCKED}<br>
+     * //等待monitor lock
      *     A thread that is blocked waiting for a monitor lock
      *     is in this state.
      *     </li>
      * <li>{@link #WAITING}<br>
+     * //等待另一个线程
      *     A thread that is waiting indefinitely for another thread to
      *     perform a particular action is in this state.
      *     </li>
@@ -1751,7 +1756,7 @@ class Thread implements Runnable {
         /**
          * Thread state for a thread which has not yet started.
          */
-        NEW,
+        NEW, //0
 
         /**
          * Thread state for a runnable thread.  A thread in the runnable
@@ -1759,7 +1764,7 @@ class Thread implements Runnable {
          * be waiting for other resources from the operating system
          * such as processor.
          */
-        RUNNABLE,
+        RUNNABLE,//1
 
         /**
          * Thread state for a thread blocked waiting for a monitor lock.
@@ -1768,7 +1773,7 @@ class Thread implements Runnable {
          * reenter a synchronized block/method after calling
          * {@link Object#wait() Object.wait}.
          */
-        BLOCKED,
+        BLOCKED,//2
 
         /**
          * Thread state for a waiting thread.
@@ -1789,7 +1794,7 @@ class Thread implements Runnable {
          * that object. A thread that has called <tt>Thread.join()</tt>
          * is waiting for a specified thread to terminate.
          */
-        WAITING,
+        WAITING,//3
 
         /**
          * Thread state for a waiting thread with a specified waiting time.
@@ -1803,13 +1808,13 @@ class Thread implements Runnable {
          *   <li>{@link LockSupport#parkUntil LockSupport.parkUntil}</li>
          * </ul>
          */
-        TIMED_WAITING,
+        TIMED_WAITING,//4
 
         /**
          * Thread state for a terminated thread.
          * The thread has completed execution.
          */
-        TERMINATED;
+        TERMINATED;//5
     }
 
     /**
