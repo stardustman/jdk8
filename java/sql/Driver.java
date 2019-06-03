@@ -29,15 +29,17 @@ import java.util.logging.Logger;
 
 /**
  * The interface that every driver class must implement.
+ * 多么霸气,每一个driver都需要实现
  * <P>The Java SQL framework allows for multiple database drivers.
- *
+ *  相当于是规范, mysql, oracle 等数据库只是在实现规范. 所以指定规则才是最后的.
  * <P>Each driver should supply a class that implements
  * the Driver interface.
  *
  * <P>The DriverManager will try to load as many drivers as it can
  * find and then for any given connection request, it will ask each
  * driver in turn to try to connect to the target URL.
- *
+ * DriverManager 会加载多个 driver, 然后为 target URL 选择正确的 driver
+ * 所以啊, url 决定了是使用哪种数据库
  * <P>It is strongly recommended that each Driver class should be
  * small and standalone so that the Driver class can be loaded and
  * queried without bringing in vast quantities of supporting code.
@@ -46,7 +48,7 @@ import java.util.logging.Logger;
  * itself and register it with the DriverManager. This means that a
  * user can load and register a driver by calling:
  * <p>
- * {@code Class.forName("foo.bah.Driver")}
+ * {@code Class.forName("foo.bah.Driver")} // 加载并注册 driver
  * <p>
  * A JDBC driver may create a {@linkplain DriverAction} implementation in order
  * to receive notifications when {@linkplain DriverManager#deregisterDriver} has
