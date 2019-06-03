@@ -28,6 +28,7 @@ package java.sql;
 /**
  * An interface that must be implemented when a {@linkplain Driver} wants to be
  * notified by {@code DriverManager}.
+ * 当 Driver 想被 DriverManager 通知的话, 必须实现的接口.
  *<P>
  * A {@code DriverAction} implementation is not intended to be used
  * directly by applications. A JDBC Driver  may choose
@@ -47,7 +48,8 @@ public interface DriverAction {
      *  to notify the JDBC driver that it was de-registered.
      * <p>
      * The {@code deregister} method is intended only to be used by JDBC Drivers
-     * and not by applications.  JDBC drivers are recommended to not implement
+     * and not by applications. 被JDBC driver使用的方法 
+     * JDBC drivers are recommended to not implement
      * {@code DriverAction} in a public class.  If there are active
      * connections to the database at the time that the {@code deregister}
      * method is called, it is implementation specific as to whether the
