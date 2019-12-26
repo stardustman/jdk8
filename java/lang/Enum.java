@@ -33,6 +33,9 @@ import java.io.ObjectStreamException;
 
 /**
  * This is the common base class of all Java language enumeration types.
+ * 所有 枚举类型的 基类
+ * 
+ * 
  *
  * More information about enums, including descriptions of the
  * implicitly declared methods synthesized by the compiler, can be
@@ -52,7 +55,7 @@ import java.io.ObjectStreamException;
  * @see     java.util.EnumMap
  * @since   1.5
  */
-public abstract class Enum<E extends Enum<E>>
+public abstract class Enum<E extends Enum<E>> //E extends Enum<E> 视为某个不知道名字的枚举类
         implements Comparable<E>, Serializable {
     /**
      * The name of this enum constant, as declared in the enum declaration.
@@ -82,6 +85,7 @@ public abstract class Enum<E extends Enum<E>>
      * in the enum declaration, where the initial constant is assigned
      * an ordinal of zero).
      *
+     *  枚举值的下标, 从 0 开始
      * Most programmers will have no use for this field.  It is designed
      * for use by sophisticated enum-based data structures, such as
      * {@link java.util.EnumSet} and {@link java.util.EnumMap}.
@@ -104,15 +108,21 @@ public abstract class Enum<E extends Enum<E>>
     }
 
     /**
-     * Sole constructor.  Programmers cannot invoke this constructor.
+     * Sole constructor. 
+     * 唯一的构造器
+     * Programmers cannot invoke this constructor.
+     * 程序员不能调用这个构造器
      * It is for use by code emitted by the compiler in response to
      * enum type declarations.
+     * 供编译器使用
+     * 
      *
      * @param name - The name of this enum constant, which is the identifier
-     *               used to declare it.
+     *               used to declare it. 枚举常量的名字
      * @param ordinal - The ordinal of this enumeration constant (its position
      *         in the enum declaration, where the initial constant is assigned
-     *         an ordinal of zero).
+     *         an ordinal of zero). 下标
+     * 其实还是可以当成 name/value 来理解滴
      */
     protected Enum(String name, int ordinal) {
         this.name = name;
@@ -164,13 +174,16 @@ public abstract class Enum<E extends Enum<E>>
     }
 
     /**
-     * Compares this enum with the specified object for order.  Returns a
-     * negative integer, zero, or a positive integer as this object is less
+     * Compares this enum with the specified object for order.
+     * Returns a negative integer, zero, or a positive integer as this object is less
      * than, equal to, or greater than the specified object.
      *
      * Enum constants are only comparable to other enum constants of the
-     * same enum type.  The natural order implemented by this
+     * same enum type. 
+     * 相同的枚举类型才能比较
+     * The natural order implemented by this
      * method is the order in which the constants are declared.
+     * 自然的顺序就是枚举常量声明的顺序
      */
     public final int compareTo(E o) {
         Enum<?> other = (Enum<?>)o;
@@ -195,7 +208,9 @@ public abstract class Enum<E extends Enum<E>>
      */
     @SuppressWarnings("unchecked")
     public final Class<E> getDeclaringClass() {
+        // 得到当前对象对应的 class
         Class<?> clazz = getClass();
+        // 查看该对象所属类的超类. 如果是 enum 定义的枚举, 超类是 Enum
         Class<?> zuper = clazz.getSuperclass();
         return (zuper == Enum.class) ? (Class<E>)clazz : (Class<E>)zuper;
     }
@@ -245,6 +260,7 @@ public abstract class Enum<E extends Enum<E>>
 
     /**
      * prevent default deserialization
+     * 阻止默认的反序列化
      */
     private void readObject(ObjectInputStream in) throws IOException,
         ClassNotFoundException {
